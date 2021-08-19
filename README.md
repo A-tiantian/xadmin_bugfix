@@ -1,11 +1,15 @@
-# Xadmin_Bugfix
+这个版本非常给力，只有一个bug
+xadmin/plugins/importexport.py
+需要把文件内48行改成：from import_export.admin import DEFAULT_FORMATS, ImportMixin
+107行-117行修改成：
+    def get_skip_admin_log(self):
+        if self.skip_admin_log is None:
+            return ImportMixin.skip_admin_log
+        else:
+            return self.skip_admin_log
 
-基于原版xadmin修改，修复原版已知bug，适配Python(3.6, 3.7, 3.8, 3.9) + Django(2.2, 3.0, 3.1, 3.2)
-
-Demo
----------
-
-http://127.0.0.1:8000/admin
-
--  User: admin
--  Password: admin123
+    def get_tmp_storage_class(self):
+        if self.tmp_storage_class is None:
+            return ImportMixin.tmp_storage_class
+        else:
+            return self.tmp_storage_class
